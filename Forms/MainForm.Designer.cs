@@ -35,15 +35,17 @@
             btnCapture = new Button();
             menuStrip = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
-            cameraToolStripMenuItem = new ToolStripMenuItem();
+            settingsToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
+            cameraToolStripMenuItem = new ToolStripMenuItem();
             resolutionToolStripMenuItem = new ToolStripMenuItem();
+            restartCameraToolStripMenuItem = new ToolStripMenuItem();
             statusStrip = new StatusStrip();
             statusLabel = new ToolStripStatusLabel();
             comboResolutions = new ComboBox();
-            btnSettings = new Button();
             saveFileDialog = new SaveFileDialog();
             toolTip = new ToolTip(components);
+            btnSettings = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBoxCamera).BeginInit();
             menuStrip.SuspendLayout();
             statusStrip.SuspendLayout();
@@ -101,23 +103,41 @@
             // 
             // fileToolStripMenuItem
             // 
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { settingsToolStripMenuItem, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(12, 20);
+            fileToolStripMenuItem.Size = new Size(37, 20);
+            fileToolStripMenuItem.Text = "File";
             // 
-            // cameraToolStripMenuItem
+            // settingsToolStripMenuItem
             // 
-            cameraToolStripMenuItem.Name = "cameraToolStripMenuItem";
-            cameraToolStripMenuItem.Size = new Size(12, 20);
+            settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            settingsToolStripMenuItem.Size = new Size(116, 22);
+            settingsToolStripMenuItem.Text = "Settings";
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(32, 19);
+            exitToolStripMenuItem.Size = new Size(116, 22);
+            exitToolStripMenuItem.Text = "Exit";
+            // 
+            // cameraToolStripMenuItem
+            // 
+            cameraToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { resolutionToolStripMenuItem, restartCameraToolStripMenuItem });
+            cameraToolStripMenuItem.Name = "cameraToolStripMenuItem";
+            cameraToolStripMenuItem.Size = new Size(60, 20);
+            cameraToolStripMenuItem.Text = "Camera";
             // 
             // resolutionToolStripMenuItem
             // 
             resolutionToolStripMenuItem.Name = "resolutionToolStripMenuItem";
-            resolutionToolStripMenuItem.Size = new Size(32, 19);
+            resolutionToolStripMenuItem.Size = new Size(180, 22);
+            resolutionToolStripMenuItem.Text = "Resolution";
+            // 
+            // restartCameraToolStripMenuItem
+            // 
+            restartCameraToolStripMenuItem.Name = "restartCameraToolStripMenuItem";
+            restartCameraToolStripMenuItem.Size = new Size(180, 22);
+            restartCameraToolStripMenuItem.Text = "Restart Camera";
             // 
             // statusStrip
             // 
@@ -142,6 +162,11 @@
             comboResolutions.TabIndex = 1;
             toolTip.SetToolTip(comboResolutions, "Select camera resolution");
             // 
+            // saveFileDialog
+            // 
+            saveFileDialog.DefaultExt = "jpg";
+            saveFileDialog.Filter = "JPEG Images|*.jpg|All Files|*.*";
+            // 
             // btnSettings
             // 
             btnSettings.Location = new Point(586, 28);
@@ -150,11 +175,6 @@
             btnSettings.TabIndex = 0;
             btnSettings.Text = "Settings";
             btnSettings.Click += btnSettings_Click;
-            // 
-            // saveFileDialog
-            // 
-            saveFileDialog.DefaultExt = "jpg";
-            saveFileDialog.Filter = "JPEG Images|*.jpg|All Files|*.*";
             // 
             // MainForm
             // 
@@ -198,8 +218,10 @@
         private StatusStrip statusStrip;
         private ToolStripStatusLabel statusLabel;
         private ComboBox comboResolutions;
-        private Button btnSettings;
         private SaveFileDialog saveFileDialog;
         private ToolTip toolTip;
+        private ToolStripMenuItem settingsToolStripMenuItem;
+        private ToolStripMenuItem restartCameraToolStripMenuItem;
+        private Button btnSettings;
     }
 }

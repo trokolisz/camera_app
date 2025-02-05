@@ -32,6 +32,11 @@ namespace camera_teszt.Forms
             FormClosing += MainForm_FormClosing;
             comboBoxCameras.SelectedIndexChanged += ComboBoxCameras_SelectedIndexChanged;
             _cameraService.NewFrame += CameraService_NewFrame;
+            // Subscribe to new menu item events
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            resolutionToolStripMenuItem.Click += resolutionToolStripMenuItem_Click;
+            settingsToolStripMenuItem.Click += settingsToolStripMenuItem_Click;
+            restartCameraToolStripMenuItem.Click += restartCameraToolStripMenuItem_Click;
         }
 
         private void MainForm_Load(object? sender, EventArgs e)
@@ -156,6 +161,45 @@ namespace camera_teszt.Forms
         private void MainForm_FormClosing(object? sender, FormClosingEventArgs e)
         {
             _cameraService.StopCamera();
+        }
+
+        private void exitToolStripMenuItem_Click(object? sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void resolutionToolStripMenuItem_Click(object? sender, EventArgs e)
+        {
+            // Open the resolutions dropdown for quick access
+            comboResolutions.DroppedDown = true;
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Reuse settings functionality from settings button
+            btnSettings.PerformClick();
+        }
+
+        private void restartCameraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!_isCapturing)
+            {
+                MessageBox.Show("Camera is not running", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            try
+            {
+                _cameraService.StopCamera();
+                var selectedCamera = _cameras[comboBoxCameras.SelectedIndex];
+                var resolution = _resolutionDictionary[comboResolutions.Text];
+                _cameraService.StartCamera(selectedCamera.MonikerString, resolution);
+                statusLabel.Text = "Camera restarted";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error restarting camera: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
