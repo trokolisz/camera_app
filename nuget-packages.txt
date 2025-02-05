@@ -1,0 +1,7 @@
+Project 'camera_teszt' has the following package references
+   [net9.0-windows7.0]: 
+   Top-level Package              Requested   Resolved
+   > AForge                       2.2.5       2.2.5   
+   > AForge.Video                 2.2.5       2.2.5   
+   > AForge.Video.DirectShow      2.2.5       2.2.5   
+
